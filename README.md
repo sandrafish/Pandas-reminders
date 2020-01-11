@@ -1,6 +1,6 @@
 # Pandas-reminders
 
-Some things i've found useful while working in Pandas.
+Some things i've found useful while working in Pandas, with some resources along the way. Most helpful of all is Ben Welsh's [First Python Notebook](https://first-python-notebook.readthedocs.io/index.html).
 
 ## Combining multiple csv files
 
@@ -36,4 +36,40 @@ To count items in a column:
 
 `df.groupby(['column']).size().reset_index(name='counts')`
 
+Groupby with sums:
 
+`df.groupby('column_to_group_by').column_to_sum.sum().reset_index()`
+
+Groupby with multiple fields:
+
+`df.groupby[('column_to_group_by', 'column_to_group_by_2)].column_to_sum.sum().reset_index()`
+
+Group and sort by descending:
+
+`df.groupby('column_to_group_by').column_to_sum.sum().reset_index().sort_values("column_to_sum", ascending=False)`
+
+## Slice columns
+
+Sometimes you want to extract soemthing a column to create a new field. Precinct numbers in Colorado, for instance, begin with the congressional district, then the state Senate district, then the House district, etc. Keep in mind that the first digit in Python is 0 here, so this example extracts the second and third digits of the field (and goes to 3 because that's where it's stopping).
+
+`df['new_column_name']= df['column'].astype(str).str[1:3]`
+
+[Resource](https://stackoverflow.com/questions/20025882/add-a-string-prefix-to-each-value-in-a-string-column-using-pandas)
+
+
+## Standardizing field names
+
+This is a two-step process, based on Ben Welsh's [Hello Cleaning](https://first-python-notebook.readthedocs.io/cleaning/index.html) section. I use this for files that are updated periodically (specifically Colorado lobbying files) to standardize names. Often, this is how we manipulate data. To correct people's spelling. There may be more efficient ways to do this, but this works for me. With tons of names, it takes a while to process tho.
+
+Step one are the changes you want to make:
+
+`def combine_names(row):
+    if row.row_name_here.startswith('Aetna'):
+        return 'Aetna Inc.'
+     elif row.row_name_here.startswith('Millercoors'):
+        return 'MillerCoors'
+ return row.row_name_here`
+ 
+ Step two, after running the cell/code above, applies the changes:
+ 
+` df['new_column_name'] = df.apply(combine_emp_names, axis=1)`
