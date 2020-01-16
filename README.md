@@ -11,7 +11,7 @@ df = pd.concat(map(pd.read_csv, glob.glob(os.path.join('', "my_files*.csv"))))`
 
 Though it also works to import the files individually, then: 
 
-`hf = pd.concat(map(pd.read_csv, ['file_1.csv', 'file_2.csv']))`
+`df = pd.concat(map(pd.read_csv, ['file_1.csv', 'file_2.csv']))`
 
 Here's a [good resource](https://towardsdatascience.com/combining-pandas-dataframes-the-easy-way-41eb0f2c1ebf)
 
