@@ -2,6 +2,8 @@
 
 Some things i've found useful while working in Pandas, with some resources along the way. Most helpful of all is Ben Welsh's [First Python Notebook](https://first-python-notebook.readthedocs.io/index.html).
 
+If you're coming from Excel, [this is also](https://github.com/ank0409/Ditching-Excel-for-Python/blob/master/Ditching%20Excel%20for%20Python!.ipynb) a great resource.
+
 ## Combining multiple csv files
 
 One option, especially if there are many files with like columns:
