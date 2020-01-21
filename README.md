@@ -64,6 +64,13 @@ Sometimes you want to extract soemthing a column to create a new field. Precinct
 
 [Resource](https://stackoverflow.com/questions/20025882/add-a-string-prefix-to-each-value-in-a-string-column-using-pandas)
 
+## Combining fields
+
+Sometimes, you want full names, not first, last, middle. This code comines fields and eliminates blanks, then strips leading spaces.
+
+`df['full_name'] = df['first_name'].fillna('') + ' ' + df['mid_initial'].fillna('') + ' ' + df['last_name'].fillna('')
+#strip leading space
+df['full_name'] = df['full_name'].str.strip()`
 
 ## Standardizing field names
 
