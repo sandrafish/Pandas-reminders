@@ -56,6 +56,10 @@ Group and sort by descending:
 
 `df.groupby('column_to_group_by').column_to_sum.sum().reset_index().sort_values("column_to_sum", ascending=False)`
 
+Weird group by to get, say months by years:
+`df = df.groupby(['years', 'months']).sum().sum(
+    level=['years', 'months']).unstack('years').fillna(0).reset_index()`
+
 ## Slice columns
 
 Sometimes you want to extract soemthing a column to create a new field. Precinct numbers in Colorado, for instance, begin with the congressional district, then the state Senate district, then the House district, etc. Keep in mind that the first digit in Python is 0 here, so this example extracts the second and third digits of the field (and goes to 3 because that's where it's stopping).
