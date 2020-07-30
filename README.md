@@ -60,6 +60,9 @@ Weird group by to get, say months by years:
 `df = df.groupby(['years', 'months']).sum().sum(
     level=['years', 'months']).unstack('years').fillna(0).reset_index()`
 
+Group by months:
+`df.groupby(['name', pd.Grouper(key='column_to_sum', freq='M')]).agg({'column_to_sum':sum})
+
 ## Slice columns
 
 Sometimes you want to extract soemthing a column to create a new field. Precinct numbers in Colorado, for instance, begin with the congressional district, then the state Senate district, then the House district, etc. Keep in mind that the first digit in Python is 0 here, so this example extracts the second and third digits of the field (and goes to 3 because that's where it's stopping).
@@ -75,6 +78,11 @@ Sometimes, you want full names, not first, last, middle. This code comines field
 `df['full_name'] = df['first_name'].fillna('') + ' ' + df['mid_initial'].fillna('') + ' ' + df['last_name'].fillna('')
 #strip leading space
 df['full_name'] = df['full_name'].str.strip()`
+
+## Convert to date
+
+If the field doesn't import as datetime, try this:
+`df['field_name'] = pd.to_datetime(df['field_name'])`
 
 ## Standardizing field names
 
